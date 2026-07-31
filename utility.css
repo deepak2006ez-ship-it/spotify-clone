@@ -1,0 +1,54 @@
+.border{
+    border:2px solid black;
+    margin:3px;
+}
+.item-center{
+    align-items: center;
+
+}
+.justify-center{
+    justify-content: center;
+}
+.flex{
+    display:flex;
+}
+.bg-black{
+    background-color: black;
+    color:white;
+}
+.invert{
+    filter: invert(1);
+}
+.bg-grey{
+    background-color: #121212;
+}
+.rounded{
+    border-radius: 7px;
+}
+.p-1{
+    padding: 10px;
+}
+.m-1{
+    margin: 10px;
+}
+
+/* Width of scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Background of scrollbar track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: #5a5a5a;
+    border-radius: 10px;
+}
+
+/* Hover effect */
+::-webkit-scrollbar-thumb:hover {
+    background: #9a9a9a;
+}
