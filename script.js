@@ -19,19 +19,11 @@ function formatTime(seconds) {
     return `${mins}:${secs}`;
 }
 async function getAlbums() {
-    let response = await fetch("/album/");
-    let html = await response.text();
-    let div = document.createElement("div");
-    div.innerHTML = html;
-    let links = div.getElementsByTagName('a');
-
-
-    for (let index = 0; index < links.length; index++) {
-        const element = links[index];
-
-
-        if (element.href.includes("/album/")) {
-            let folderName = element.href.split("/")[4];
+    let response = await fetch("/album/album.json");
+    let data = await response.json();
+    console.log(data);
+    for (const album of data) {        
+            let folderName = album.folder
             let bgLoad = await fetch(`/album/${folderName}/albumCover/image.jpg`)
             let info = await fetch(`/album/${folderName}/albumDetail/info.json`)
             let data = await info.json();
@@ -54,7 +46,7 @@ async function getAlbums() {
             `
 
 
-        }
+        
 
 
     }
@@ -62,23 +54,11 @@ async function getAlbums() {
     let cards = document.querySelector(".cardContainer").querySelectorAll(".card");
     for (let card of cards) {
         card.addEventListener("click", async () => {
-            currFolder = card.dataset.folderName
-            let loadMusic = await fetch(`/album/${currFolder}/musicList`)
-            let musicText = await loadMusic.text();
-            let newDiv = document.createElement("div");
-            newDiv.innerHTML = musicText;
-            let noAnchor = newDiv.getElementsByTagName("a");
-            songs = [];
+            currFolder = card.dataset.folderName;
+            let loadMusic = await fetch(`/album/${currFolder}/musicList/song.json`)
+            songs = await loadMusic.json();
 
-            for (let songz = 0; songz < noAnchor.length; songz++) {
-                const elementz = noAnchor[songz];
-                if (elementz.href.endsWith("mp3")) {
-
-                    songs.push(elementz.href.split('/')[6]);
-
-                }
-
-            }
+            console.log(songs)
             
             let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
 
