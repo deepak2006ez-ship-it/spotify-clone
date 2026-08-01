@@ -19,13 +19,13 @@ function formatTime(seconds) {
     return `${mins}:${secs}`;
 }
 async function getAlbums() {
-    let response = await fetch("/album/album.json");
+    let response = await fetch("album/album.json");
     let data = await response.json();
     console.log(data);
     for (const album of data) {        
             let folderName = album.folder
-            let bgLoad = await fetch(`/album/${folderName}/albumCover/image.jpg`)
-            let info = await fetch(`/album/${folderName}/albumDetail/info.json`)
+            let bgLoad = await fetch(`album/${folderName}/albumCover/image.jpg`)
+            let info = await fetch(`album/${folderName}/albumDetail/info.json`)
             let data = await info.json();
 
 
@@ -55,7 +55,7 @@ async function getAlbums() {
     for (let card of cards) {
         card.addEventListener("click", async () => {
             currFolder = card.dataset.folderName;
-            let loadMusic = await fetch(`/album/${currFolder}/musicList/song.json`)
+            let loadMusic = await fetch(`album/${currFolder}/musicList/song.json`)
             songs = await loadMusic.json();
 
             console.log(songs)
@@ -108,7 +108,7 @@ async function getAlbums() {
 }
 
 const playMusic = (currFolder, musicPath) => {
-    currentSong.src = `/album/${currFolder}/musicList/${musicPath}`
+    currentSong.src = `album/${currFolder}/musicList/${musicPath}`
     currentSong.play();
 
     document.querySelector(".songInfo").innerHTML = musicPath;
